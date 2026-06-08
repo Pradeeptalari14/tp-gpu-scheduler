@@ -1,0 +1,17 @@
+apiVersion: nvidia.com/v1
+kind: ClusterPolicy
+metadata:
+  name: gpu-sharing-policy
+spec:
+  sharing:
+    mode: "MIG"
+    mig:
+      strategy: "mixed"
+      profiles:
+        - "1g.5gb"
+        - "2g.10gb"
+  allocator:
+    strategy: "spread"
+    limits:
+      gpu_weight: 4
+      evict_on_drift: true

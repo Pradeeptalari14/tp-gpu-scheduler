@@ -1,0 +1,14 @@
+apiVersion: kueue.x-k8s.io/v1beta1
+kind: ClusterQueue
+metadata:
+  name: gpu-batch-queue
+spec:
+  cohort: gpu-cohort
+  queueingStrategy: "Weighted"
+  resourceGroups:
+    - coveredResources: ["nvidia.com/gpu"]
+      flavors:
+        - name: "on-demand-gpu"
+          resources:
+            - name: "nvidia.com/gpu"
+              nominalQuota: 4
